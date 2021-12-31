@@ -5,7 +5,11 @@ int main()
 {
 	int choice;
 
-	std::cout << R"(
+	while (true)
+	{
+		system("cls");
+
+		std::cout << R"(
                                             
                                                             
                  *//                                          
@@ -26,32 +30,34 @@ int main()
 
 	)" << '\n';
 
-	std::cout << "  [1]  :  " << "clean traces" << std::endl;
-	std::cout << "  [2]  :  " << "enable network bypass" << std::endl;
-	std::cout << "  [3]  :  " << "disable network bypass" << std::endl;
-	std::cin >> choice;
+		std::cout << "  [1]  :  " << "clean traces" << std::endl;
+		std::cout << "  [2]  :  " << "enable network bypass" << std::endl;
+		std::cout << "  [3]  :  " << "disable network bypass" << std::endl;
+		std::cin >> choice;
 
-	g_network = std::make_unique<network>();
-	g_trace = std::make_unique<trace>();
+		g_network = std::make_unique<network>();
+		g_trace = std::make_unique<trace>();
 
-	switch (choice)
-	{
-		case 1:
+		switch (choice)
 		{
-			g_trace->setup();
+			case 1:
+			{
+				g_trace->setup();
+			}
+			break;
+			case 2:
+			{
+				g_network->setup();
+			}
+			break;
+			case 3:
+			{
+				g_network->destroy();
+			}
+			break;
 		}
-		break;
-		case 2:
-		{
-			g_network->setup();
-		}
-		break;
-		case 3:
-		{
-			g_network->destroy();
-		}
-		break;
+
+		system("Pause");
 	}
-	
-	system("Pause");
+
 }
